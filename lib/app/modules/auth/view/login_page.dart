@@ -57,22 +57,26 @@ class _LoginPageState extends State<LoginPage> {
 
               SizedBox(height: 16,),
 
-              ButtonPersonalized(
-                label: "Logar",
-                loading: false,
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width,
-                onPressed: () async {
-                  try {
-                    await _authController.login(_emailController.text, _passwordController.text);
-                  } catch(e) {
-                    showDialogCustom(
-                        context,
-                        DialogCustom(message: messageError((e)),)
-                    );
-                  }
+              StreamBuilder(
+                stream: _authController.loading,
+                initialData: false,
+                builder: (context, snapshot) {
+                  return ButtonPersonalized(
+                    label: "Logar",
+                    loading: snapshot.data,
+                    width: MediaQuery.of(context).size.width,
+                    onPressed: () async {
+                      try {
+                        await _authController.login(_emailController.text, _passwordController.text);
+                      } catch(e) {
+                        showDialogCustom(
+                            context,
+                            DialogCustom(message: messageError((e)),)
+                        );
+                        _authController.setLoading(false);
+                      }
+                    },
+                  );
                 },
               ),
 
@@ -85,10 +89,7 @@ class _LoginPageState extends State<LoginPage> {
               ButtonPersonalized(
                 label: "Registrar",
                 colorText: Constants.COLOR_SECONDARY,
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width,
+                width: MediaQuery.of(context).size.width,
                 onPressed: () =>
                     Navigator.of(context).pushNamed(RegisterPage.router),
                 borderLine: true,
