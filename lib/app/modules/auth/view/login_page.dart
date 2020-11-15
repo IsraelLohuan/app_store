@@ -4,6 +4,7 @@ import 'package:appstore/app/modules/auth/components/field_background.dart';
 import 'package:appstore/app/modules/auth/components/line_or.dart';
 import 'package:appstore/app/modules/auth/controllers/auth_controller.dart';
 import 'package:appstore/app/modules/auth/view/register_page.dart';
+import 'package:appstore/app/modules/home/view/home_page.dart';
 import 'package:appstore/app/shared/constants.dart';
 import 'package:appstore/app/shared/dialog.dart';
 import 'package:appstore/app/shared/helper.dart';
@@ -65,9 +66,11 @@ class _LoginPageState extends State<LoginPage> {
                     label: "Logar",
                     loading: snapshot.data,
                     width: MediaQuery.of(context).size.width,
+                    colorButton: Constants.COLOR_PRIMARY,
                     onPressed: () async {
                       try {
                         await _authController.login(_emailController.text, _passwordController.text);
+                        Navigator.of(context).pushNamedAndRemoveUntil(HomePage.router, (route) => false);
                       } catch(e) {
                         showDialogCustom(
                             context,
@@ -88,10 +91,10 @@ class _LoginPageState extends State<LoginPage> {
 
               ButtonPersonalized(
                 label: "Registrar",
-                colorText: Constants.COLOR_SECONDARY,
+                colorText: Constants.COLOR_PRIMARY,
+                colorButton: Constants.COLOR_PRIMARY,
                 width: MediaQuery.of(context).size.width,
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(RegisterPage.router),
+                onPressed: () => Navigator.of(context).pushNamed(RegisterPage.router),
                 borderLine: true,
               )
             ],
