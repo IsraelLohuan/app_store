@@ -1,10 +1,10 @@
 import 'package:appstore/app/components/dialog_custom.dart';
-import 'package:appstore/app/modules/auth/components/button_personalized.dart';
+import 'package:appstore/app/components/button_personalized.dart';
 import 'package:appstore/app/modules/auth/components/field_background.dart';
 import 'package:appstore/app/modules/auth/components/line_or.dart';
 import 'package:appstore/app/modules/auth/controllers/auth_controller.dart';
 import 'package:appstore/app/modules/auth/view/register_page.dart';
-import 'package:appstore/app/modules/home/view/home_page.dart';
+import 'package:appstore/app/modules/main/view/main_page.dart';
 import 'package:appstore/app/shared/constants.dart';
 import 'package:appstore/app/shared/dialog.dart';
 import 'package:appstore/app/shared/helper.dart';
@@ -69,13 +69,15 @@ class _LoginPageState extends State<LoginPage> {
                     colorButton: Constants.COLOR_PRIMARY,
                     onPressed: () async {
                       try {
+                        _authController.setLoading(true);
                         await _authController.login(_emailController.text, _passwordController.text);
-                        Navigator.of(context).pushNamedAndRemoveUntil(HomePage.router, (route) => false);
+                        Navigator.of(context).pushNamedAndRemoveUntil(MainPage.router, (route) => false);
                       } catch(e) {
                         showDialogCustom(
                             context,
                             DialogCustom(message: messageError((e)),)
                         );
+                      } finally {
                         _authController.setLoading(false);
                       }
                     },

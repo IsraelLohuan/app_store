@@ -18,14 +18,8 @@ class AuthController {
   }
 
   Future login(String email, String password) async {
-
     validateFields(email, password);
-
-    setLoading(true);
-
     person = await _authRepository.login(email, password);
-
-    setLoading(false);
   }
 
   void validateFields(String email, String password) {
