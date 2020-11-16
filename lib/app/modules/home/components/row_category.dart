@@ -75,7 +75,7 @@ class _RowCategoryState extends State<RowCategory> {
   Widget _horizontalList() {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 250,
+      height: 230,
       child: ListView(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,

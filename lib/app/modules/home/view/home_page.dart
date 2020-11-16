@@ -17,6 +17,14 @@ class _HomePageState extends State<HomePage> {
           category: "Destaque",
           subTitleCategory: "Veja nossos relógios em destaque!",
         ),
+        RowCategory(
+          category: "Promoção",
+          subTitleCategory: "Veja nossos relógios em destaque!",
+        ),
+        RowCategory(
+          category: "Mais Vendidos",
+          subTitleCategory: "Veja nossos relógios em destaque!",
+        ),
       ],
     );
   }

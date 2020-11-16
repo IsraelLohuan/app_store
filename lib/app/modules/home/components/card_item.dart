@@ -56,12 +56,14 @@ class _CardItemState extends State<CardItem> {
     return Container(
       width: 150,
       height: 150,
-      child: Card(
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Image.network(imagesRandom.first),
-         )
-      ),
+      child: Card(child: _image()),
+    );
+  }
+
+  Widget _image() {
+    return Padding(
+      padding: EdgeInsets.all(16),
+      child: Image.network(imagesRandom.first),
     );
   }
 
