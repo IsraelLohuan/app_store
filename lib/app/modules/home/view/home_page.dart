@@ -1,4 +1,5 @@
 import 'package:appstore/app/modules/home/components/header_image.dart';
+import 'package:appstore/app/modules/home/components/row_category.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,10 +12,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
-        Stack(
-          children: <Widget>[
-            HeaderImage()
-          ],
+        HeaderImage(),
+        RowCategory(
+          category: "Destaque",
+          subTitleCategory: "Veja nossos relógios em destaque!",
         ),
       ],
     );

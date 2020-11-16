@@ -15,7 +15,7 @@ class HeaderImage extends StatelessWidget {
   Widget _image(BuildContext context) {
     return Container(
       child: Image.asset(
-        "assets/images/img_top.jpg",
+        "assets/images/img_top.png",
         fit: BoxFit.fill,
       ),
       width: MediaQuery.of(context).size.width,
@@ -30,6 +30,7 @@ class HeaderImage extends StatelessWidget {
         fontFamily: 'Alfa Slab One',
         color: Colors.white,
         fontSize: 20,
+        fontWeight: FontWeight.w400
       ),
     );
   }
@@ -56,13 +57,13 @@ class HeaderImage extends StatelessWidget {
 
   Widget _contentImage() {
     return Padding(
-        padding: EdgeInsets.only(left: 16, top: 280),
+        padding: EdgeInsets.only(left: 16, top: 275),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _textImage("Relógios"),
-            _textImage("De qualidade"),
-            SizedBox(height: 10,),
+            _textImage("de qualidade"),
+            SizedBox(height: 5,),
             _buttonMore()
           ],
         )
