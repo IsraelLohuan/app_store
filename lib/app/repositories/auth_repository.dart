@@ -1,5 +1,5 @@
 import 'package:appstore/app/models/person.dart';
-import 'package:appstore/app/shared/dio_custom.dart';
+import 'package:appstore/app/shared/others/dio_custom.dart';
 import 'package:dio/dio.dart';
 
 class AuthRepository extends DioCustom {

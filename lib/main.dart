@@ -2,7 +2,8 @@ import 'package:appstore/app/modules/auth/controllers/auth_controller.dart';
 import 'package:appstore/app/modules/auth/view/login_page.dart';
 import 'package:appstore/app/modules/auth/view/register_page.dart';
 import 'package:appstore/app/modules/main/view/main_page.dart';
-import 'package:appstore/app/shared/constants.dart';
+import 'package:appstore/app/shared/controllers/product_controller.dart';
+import 'package:appstore/app/shared/others/constants.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       blocs: [
-        Bloc((i) => AuthController())
+        Bloc((i) => AuthController()),
+        Bloc((i) => ProductController())
       ],
       child: MaterialApp(
         title: 'MaxClock App',

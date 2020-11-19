@@ -1,3 +1,4 @@
+import 'package:appstore/app/models/product.dart';
 import 'package:appstore/app/modules/home/components/card_item.dart';
 import 'package:flutter/material.dart';
 
@@ -5,8 +6,13 @@ class RowCategory extends StatefulWidget {
 
   final String category;
   final String subTitleCategory;
+  final List<Product> products;
 
-  RowCategory({@required this.category, @required this.subTitleCategory});
+  RowCategory({
+    @required this.category,
+    @required this.subTitleCategory,
+    @required this.products,
+  });
 
   @override
   _RowCategoryState createState() => _RowCategoryState();
@@ -16,6 +22,7 @@ class _RowCategoryState extends State<RowCategory> {
 
   String get category => widget.category;
   String get subTitleCategory => widget.subTitleCategory;
+  List<Product> get products => widget.products;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +54,7 @@ class _RowCategoryState extends State<RowCategory> {
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Text(
                   subTitleCategory,
@@ -55,7 +63,7 @@ class _RowCategoryState extends State<RowCategory> {
                       fontWeight: FontWeight.w100
                   ),
                 ),
-                SizedBox(width: 22,),
+                SizedBox(width: 16,),
                 Text(
                   "Visualizar Todos",
                   style: TextStyle(
@@ -73,17 +81,16 @@ class _RowCategoryState extends State<RowCategory> {
   }
 
   Widget _horizontalList() {
+
+    int cardType = category == "Destaque" ? CardItem.TYPE_CARD_FEATURED : category == "Promoção" ? CardItem.TYPE_CARD_PROMOTIONAL : CardItem.TYPE_CARD_GENERAL;
+
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 230,
       child: ListView(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          CardItem(),
-          CardItem(),
-          CardItem()
-        ],
+        children: products.map<CardItem>((product) => CardItem(product: product, typeCard: cardType,)).toList()
       ),
     );
   }

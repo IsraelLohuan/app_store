@@ -1,4 +1,4 @@
-import 'package:appstore/app/shared/constants.dart';
+import 'package:appstore/app/shared/others/constants.dart';
 import 'package:flutter/material.dart';
 
 class DialogCustom extends StatelessWidget {

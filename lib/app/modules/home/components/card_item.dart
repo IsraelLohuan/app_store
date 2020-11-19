@@ -1,5 +1,7 @@
 
-import 'package:appstore/app/shared/constants.dart';
+import 'package:appstore/app/models/product.dart';
+import 'package:appstore/app/shared/others/constants.dart';
+import 'package:appstore/app/shared/others/helper.dart';
 import 'package:flutter/material.dart';
 
 class CardItem extends StatefulWidget {
@@ -10,7 +12,9 @@ class CardItem extends StatefulWidget {
 
   final int typeCard;
 
-  CardItem({this.typeCard = 3});
+  final Product product;
+
+  CardItem({this.typeCard = 3, this.product});
 
   @override
   _CardItemState createState() => _CardItemState();
@@ -18,16 +22,10 @@ class CardItem extends StatefulWidget {
 
 class _CardItemState extends State<CardItem> {
 
-  final imagesRandom = [
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTfUpOb7t-9-Y9NU90eDY8WdYjaeiddMem6G8gKwUWdnommhCu9h3U2QoiGVvo8zgw7_BoGxHs&usqp=CAc",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ93AxXuTaYPlc9QtJ1RiPiqe3-66w-OqWxwlqV_WpD_dn9z7Pl4rjUdfhLJh8EwydzPphMRyA&usqp=CAc",
-  ];
+  Product get product => widget.product;
 
   @override
   Widget build(BuildContext context) {
-
-    imagesRandom.shuffle();
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -35,14 +33,14 @@ class _CardItemState extends State<CardItem> {
         _stars(),
         SizedBox(height: 8,),
         Text(
-          "Relógio Calvin Klein",
+          product.titulo,
           style: TextStyle(
             color: Colors.white
           ),
         ),
         SizedBox(height: 8,),
         Text(
-          "R\$ 280,00",
+          formatNumberInReal(product.preco),
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold
@@ -63,13 +61,14 @@ class _CardItemState extends State<CardItem> {
   Widget _image() {
     return Padding(
       padding: EdgeInsets.all(16),
-      child: Image.network(imagesRandom.first),
+      child: Image.memory(getBytesImage(product.base64)),
     );
   }
 
   Widget _stars() {
     return Row(
       children: <Widget>[
+        Icon(Icons.star, color: Constants.COLOR_YELLOW, size: 15,),
         Icon(Icons.star, color: Constants.COLOR_YELLOW, size: 15,),
         Icon(Icons.star, color: Constants.COLOR_YELLOW, size: 15,),
         Icon(Icons.star, color: Constants.COLOR_YELLOW, size: 15,),

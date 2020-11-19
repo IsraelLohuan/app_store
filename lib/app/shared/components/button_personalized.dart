@@ -1,5 +1,5 @@
-import 'package:appstore/app/components/progress_custom.dart';
-import 'package:appstore/app/shared/constants.dart';
+import 'package:appstore/app/shared/components/progress_custom.dart';
+import 'package:appstore/app/shared/others/constants.dart';
 import 'package:flutter/material.dart';
 
 class ButtonPersonalized extends StatelessWidget {

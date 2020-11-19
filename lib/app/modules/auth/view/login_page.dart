@@ -1,13 +1,13 @@
-import 'package:appstore/app/components/dialog_custom.dart';
-import 'package:appstore/app/components/button_personalized.dart';
+import 'package:appstore/app/shared/components/dialog_custom.dart';
+import 'package:appstore/app/shared/components/button_personalized.dart';
 import 'package:appstore/app/modules/auth/components/field_background.dart';
 import 'package:appstore/app/modules/auth/components/line_or.dart';
 import 'package:appstore/app/modules/auth/controllers/auth_controller.dart';
 import 'package:appstore/app/modules/auth/view/register_page.dart';
 import 'package:appstore/app/modules/main/view/main_page.dart';
-import 'package:appstore/app/shared/constants.dart';
-import 'package:appstore/app/shared/dialog.dart';
-import 'package:appstore/app/shared/helper.dart';
+import 'package:appstore/app/shared/others/constants.dart';
+import 'package:appstore/app/shared/others/dialog.dart';
+import 'package:appstore/app/shared/others/helper.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 

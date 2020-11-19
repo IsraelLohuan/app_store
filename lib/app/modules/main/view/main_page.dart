@@ -1,5 +1,5 @@
 import 'package:appstore/app/modules/home/view/home_page.dart';
-import 'package:appstore/app/shared/constants.dart';
+import 'package:appstore/app/shared/others/constants.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -23,6 +23,7 @@ class _MainPageState extends State<MainPage> {
       body: pages[0],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Constants.COLOR_PRIMARY,
+        type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -35,6 +36,10 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             title: Text("Carrinho"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            title: Text("Perfil"),
           ),
         ],
         unselectedItemColor: Colors.white,

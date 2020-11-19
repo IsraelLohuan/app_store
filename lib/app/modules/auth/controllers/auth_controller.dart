@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:appstore/app/models/person.dart';
 import 'package:appstore/app/repositories/auth_repository.dart';
-import 'package:appstore/app/shared/helper.dart';
+import 'package:appstore/app/shared/others/helper.dart';
 
 class AuthController {
 
