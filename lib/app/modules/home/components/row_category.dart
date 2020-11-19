@@ -82,6 +82,19 @@ class _RowCategoryState extends State<RowCategory> {
 
   Widget _horizontalList() {
 
+    if(products.isEmpty) {
+      return Padding(
+        padding: EdgeInsets.only(top: 16),
+        child: Text(
+          "Não há produtos que se encontre nesta categoria.",
+          style: TextStyle(
+              color: Colors.white
+          ),
+          textAlign: TextAlign.center,
+        ),
+      );
+    }
+
     int cardType = category == "Destaque" ? CardItem.TYPE_CARD_FEATURED : category == "Promoção" ? CardItem.TYPE_CARD_PROMOTIONAL : CardItem.TYPE_CARD_GENERAL;
 
     return Container(

@@ -25,12 +25,15 @@ class _HomePageState extends State<HomePage> {
           builder: (context, snapshot) {
 
             if(snapshot.hasError) {
-              return Center(
-                child: Text(
+              return Padding(
+                padding: EdgeInsets.only(top: 16),
+                child: Center(
+                  child: Text(
                     "OPA! Não foi possível carregar os produtos!",
                     style: TextStyle(
-                      color: Colors.white
+                        color: Colors.white
                     ),
+                  ),
                 ),
               );
             }
