@@ -1,9 +1,9 @@
 import 'package:appstore/app/models/product.dart';
+import 'package:appstore/app/modules/details/view/details_page.dart';
 import 'package:appstore/app/modules/home/components/card_item.dart';
 import 'package:flutter/material.dart';
 
 class RowCategory extends StatefulWidget {
-
   final String category;
   final String subTitleCategory;
   final List<Product> products;
@@ -19,7 +19,6 @@ class RowCategory extends StatefulWidget {
 }
 
 class _RowCategoryState extends State<RowCategory> {
-
   String get category => widget.category;
   String get subTitleCategory => widget.subTitleCategory;
   List<Product> get products => widget.products;
@@ -31,7 +30,9 @@ class _RowCategoryState extends State<RowCategory> {
       child: Column(
         children: <Widget>[
           _description(),
-          SizedBox(height: 8,),
+          SizedBox(
+            height: 8,
+          ),
           _horizontalList()
         ],
       ),
@@ -48,10 +49,7 @@ class _RowCategoryState extends State<RowCategory> {
             Text(
               category,
               style: TextStyle(
-                color: Colors.white,
-                fontFamily: "Oswald",
-                fontSize: 30
-              ),
+                  color: Colors.white, fontFamily: "Oswald", fontSize: 30),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -59,18 +57,17 @@ class _RowCategoryState extends State<RowCategory> {
                 Text(
                   subTitleCategory,
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w100
-                  ),
+                      color: Colors.white, fontWeight: FontWeight.w100),
                 ),
-                SizedBox(width: 16,),
+                SizedBox(
+                  width: 16,
+                ),
                 Text(
                   "Visualizar Todos",
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w300,
-                      fontSize: 13
-                  ),
+                      fontSize: 13),
                 )
               ],
             )
@@ -81,30 +78,38 @@ class _RowCategoryState extends State<RowCategory> {
   }
 
   Widget _horizontalList() {
-
-    if(products.isEmpty) {
+    if (products.isEmpty) {
       return Padding(
         padding: EdgeInsets.only(top: 16),
         child: Text(
           "Não há produtos que se encontre nesta categoria.",
-          style: TextStyle(
-              color: Colors.white
-          ),
+          style: TextStyle(color: Colors.white),
           textAlign: TextAlign.center,
         ),
       );
     }
 
-    int cardType = category == "Destaque" ? CardItem.TYPE_CARD_FEATURED : category == "Promoção" ? CardItem.TYPE_CARD_PROMOTIONAL : CardItem.TYPE_CARD_GENERAL;
+    int cardType = category == "Destaque"
+        ? CardItem.TYPE_CARD_FEATURED
+        : category == "Promoção"
+            ? CardItem.TYPE_CARD_PROMOTIONAL
+            : CardItem.TYPE_CARD_GENERAL;
 
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 230,
       child: ListView(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        children: products.map<CardItem>((product) => CardItem(product: product, typeCard: cardType,)).toList()
-      ),
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          children: products
+              .map<CardItem>(
+                (product) => CardItem(
+                  product: product,
+                  typeCard: cardType,
+                  onTap: () => Navigator.of(context)
+                      .pushNamed(DetailsPage.router, arguments: product),
+                ),
+              ).toList()),
     );
   }
 }
