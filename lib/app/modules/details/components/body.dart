@@ -1,4 +1,7 @@
 import 'package:appstore/app/models/product.dart';
+import 'package:appstore/app/modules/details/components/add_to_cart.dart';
+import 'package:appstore/app/modules/details/components/count_with_fav_btn.dart';
+import 'package:appstore/app/modules/details/components/description.dart';
 import 'package:appstore/app/modules/details/components/product_title_with_image.dart';
 import 'package:flutter/material.dart';
 
@@ -21,13 +24,26 @@ class Body extends StatelessWidget {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.only(top: size.height * 0.3),
-                  height: 500,
+                  padding: EdgeInsets.only(
+                    top: size.height * 0.12,
+                    left: 16,
+                    right: 16
+                  ),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(24),
                           topRight: Radius.circular(24)
                       )
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Description(product),
+                      CountWithFavBtn(),
+                      Padding(padding: EdgeInsets.symmetric(vertical: 16)),
+                      AddToCart(product)
+                    ],
                   ),
                 ),
                 ProductTitleWithImage(product)
