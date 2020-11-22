@@ -8,9 +8,8 @@ class ColumnItem extends StatefulWidget {
 
   final int typeCard;
   final Product product;
-  final Function onTap;
 
-  ColumnItem({this.typeCard = 3, this.product, this.onTap});
+  ColumnItem({this.typeCard = 3, this.product});
 
   @override
   _ColumnItemState createState() => _ColumnItemState();
@@ -19,19 +18,18 @@ class ColumnItem extends StatefulWidget {
 class _ColumnItemState extends State<ColumnItem> {
   int get typeCard => widget.typeCard;
   Product get product => widget.product;
-  Function get onTap => widget.onTap;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        ColumnCard(product, typeCard, onTap),
-        Stars(typeCard),
+        ColumnCard(product),
+        Stars(product),
         SizedBox(height: 8,),
         Text(product.titulo, style: TextStyle(color: Colors.white)),
         SizedBox(height: 8,),
-        TextPrice(product, typeCard)
+        TextPrice(product)
       ],
     );
   }

@@ -6,9 +6,8 @@ import 'package:flutter/material.dart';
 class TextPrice extends StatelessWidget {
 
   final Product product;
-  final int typeCard;
 
-  TextPrice(this.product, this.typeCard);
+  TextPrice(this.product);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class TextPrice extends StatelessWidget {
   }
 
   _body() {
-    if(typeCard == Constants.TYPE_CARD_PROMOTIONAL) {
+    if(getTypeCard(product) == Constants.TYPE_CARD_PROMOTIONAL) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[

@@ -11,7 +11,7 @@ class ImageWithBoxBlack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Stack(
+    return Stack(
       children: <Widget>[
         ImageCard(product),
         BoxBlackOff(product)

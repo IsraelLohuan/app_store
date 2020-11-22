@@ -13,7 +13,10 @@ class ImageCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(16),
       child: Center(
-        child: Image.memory(getBytesImage(product.base64)),
+        child: Image.memory(
+            getBytesImage(product.base64),
+            height: 80,
+        ),
       ),
     );
   }

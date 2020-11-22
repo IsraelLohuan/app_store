@@ -102,7 +102,7 @@ class _RowCategoryState extends State<RowCategory> {
       child: ListView(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          children: products.map<ColumnItem>((product) => ColumnItem(product: product, typeCard: cardType, onTap: () => Navigator.of(context).pushNamed(DetailsPage.router, arguments: product),),).toList(),
+          children: products.map<ColumnItem>((product) => ColumnItem(product: product, typeCard: cardType),).toList(),
       ),
     );
   }
