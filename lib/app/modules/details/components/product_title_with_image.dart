@@ -38,7 +38,8 @@ class ProductTitleWithImage extends StatelessWidget {
                 Expanded(
                   child: Image.memory(
                     getBytesImage((product.base64)),
-                    fit: BoxFit.fill,
+                    height: 180,
+                    width: 180,
                   ),
                 )
               ],

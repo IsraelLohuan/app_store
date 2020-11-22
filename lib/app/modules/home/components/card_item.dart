@@ -19,6 +19,7 @@ class CardItem extends StatefulWidget {
 }
 
 class _CardItemState extends State<CardItem> {
+  int get typeCard => widget.typeCard;
   Product get product => widget.product;
   Function get onTap => widget.onTap;
 
@@ -39,11 +40,37 @@ class _CardItemState extends State<CardItem> {
         SizedBox(
           height: 8,
         ),
-        Text(
-          formatNumberInReal(product.preco),
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        )
+        _textPrice()
       ],
+    );
+  }
+
+  Widget _textPrice() {
+    if(typeCard == CardItem.TYPE_CARD_PROMOTIONAL) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            formatNumberInReal(product.preco),
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 10,
+                decoration: TextDecoration.lineThrough
+            ),
+          ),
+          SizedBox(width: 10,),
+          Text(
+            formatNumberInReal(product.preco - product.desconto),
+            style: TextStyle(color: Constants.COLOR_SECONDARY, fontWeight: FontWeight.bold),
+          ),
+        ],
+      );
+    }
+
+    return Text(
+      formatNumberInReal(product.preco),
+      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
     );
   }
 
@@ -53,47 +80,87 @@ class _CardItemState extends State<CardItem> {
       child: Container(
         width: 150,
         height: 150,
-        child: Card(child: _image()),
+        child: Card(child: _cardContent()),
       ),
     );
   }
 
-  Widget _image() {
+  Widget _cardContent() {
+
+    if(typeCard == CardItem.TYPE_CARD_PROMOTIONAL) {
+      return Stack(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Center(
+              child: Image.memory(getBytesImage(product.base64)),
+            )
+          ),
+          Align(
+            child: Opacity(
+              opacity: 0.8,
+              child: Container(
+                color: Colors.black,
+                width: MediaQuery.of(context).size.width,
+                height: 18,
+                child: Padding(
+                  padding: EdgeInsets.all(2),
+                  child: Text(
+                    "${getPercentualValue(product.preco, product.desconto)}% OFF",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              ),
+            ),
+            alignment: Alignment.bottomRight,
+          )
+        ],
+      );
+    }
     return Padding(
       padding: EdgeInsets.all(16),
-      child: Image.memory(getBytesImage(product.base64)),
+      child: Center(
+        child: Image.memory(getBytesImage(product.base64)),
+      ),
     );
   }
 
   Widget _stars() {
-    return Row(
-      children: <Widget>[
-        Icon(
-          Icons.star,
-          color: Constants.COLOR_YELLOW,
-          size: 15,
-        ),
-        Icon(
-          Icons.star,
-          color: Constants.COLOR_YELLOW,
-          size: 15,
-        ),
-        Icon(
-          Icons.star,
-          color: Constants.COLOR_YELLOW,
-          size: 15,
-        ),
-        Icon(
-          Icons.star,
-          color: Constants.COLOR_YELLOW,
-          size: 15,
-        ),
-        Icon(
-          Icons.star,
-          color: Constants.COLOR_YELLOW,
-          size: 15,
-        )
-      ],
+    return Visibility(
+      visible: typeCard == CardItem.TYPE_CARD_FEATURED,
+      child: Row(
+        children: <Widget>[
+          Icon(
+            Icons.star,
+            color: Constants.COLOR_YELLOW,
+            size: 15,
+          ),
+          Icon(
+            Icons.star,
+            color: Constants.COLOR_YELLOW,
+            size: 15,
+          ),
+          Icon(
+            Icons.star,
+            color: Constants.COLOR_YELLOW,
+            size: 15,
+          ),
+          Icon(
+            Icons.star,
+            color: Constants.COLOR_YELLOW,
+            size: 15,
+          ),
+          Icon(
+            Icons.star,
+            color: Constants.COLOR_YELLOW,
+            size: 15,
+          )
+        ],
+      ),
     );
   }
 }

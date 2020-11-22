@@ -27,3 +27,9 @@ String formatNumberInReal(double valor, {bool replace = false}) {
 
   return "R\$ " + numberFormat.format(valor);
 }
+
+String getPercentualValue(double valueTotal, double valueDiscount) {
+  double value = valueDiscount * 100;
+  double result = value/valueTotal;
+  return result.toStringAsFixed(2);
+}
