@@ -1,6 +1,7 @@
 import 'package:appstore/app/models/product.dart';
 import 'package:appstore/app/modules/details/view/details_page.dart';
-import 'package:appstore/app/modules/home/components/card_item.dart';
+import 'package:appstore/app/modules/home/components/column_item.dart';
+import 'package:appstore/app/shared/others/constants.dart';
 import 'package:flutter/material.dart';
 
 class RowCategory extends StatefulWidget {
@@ -90,10 +91,10 @@ class _RowCategoryState extends State<RowCategory> {
     }
 
     int cardType = category == "Destaque"
-        ? CardItem.TYPE_CARD_FEATURED
+        ? Constants.TYPE_CARD_FEATURED
         : category == "Promoção"
-            ? CardItem.TYPE_CARD_PROMOTIONAL
-            : CardItem.TYPE_CARD_GENERAL;
+            ? Constants.TYPE_CARD_PROMOTIONAL
+            : Constants.TYPE_CARD_GENERAL;
 
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -101,15 +102,8 @@ class _RowCategoryState extends State<RowCategory> {
       child: ListView(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          children: products
-              .map<CardItem>(
-                (product) => CardItem(
-                  product: product,
-                  typeCard: cardType,
-                  onTap: () => Navigator.of(context)
-                      .pushNamed(DetailsPage.router, arguments: product),
-                ),
-              ).toList()),
+          children: products.map<ColumnItem>((product) => ColumnItem(product: product, typeCard: cardType, onTap: () => Navigator.of(context).pushNamed(DetailsPage.router, arguments: product),),).toList(),
+      ),
     );
   }
 }
