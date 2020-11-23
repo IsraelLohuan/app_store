@@ -19,6 +19,12 @@ class _ProductListState extends State<ProductList> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Constants.COLOR_PRIMARY,
+        actions: <Widget>[
+          IconButton(
+            icon: SvgPicture.asset("assets/icons/search.svg"),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.only(top: 16),
