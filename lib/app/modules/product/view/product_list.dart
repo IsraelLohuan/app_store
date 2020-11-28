@@ -2,9 +2,7 @@ import 'package:appstore/app/models/product.dart';
 import 'package:appstore/app/modules/product/components/card_product.dart';
 import 'package:appstore/app/modules/product/components/header.dart';
 import 'package:appstore/app/modules/product/controllers/product_list_controller.dart';
-import 'package:appstore/app/shared/controllers/product_controller.dart';
 import 'package:appstore/app/shared/others/constants.dart';
-import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 
 class ProductList extends StatefulWidget {
@@ -24,12 +22,10 @@ class _ProductListState extends State<ProductList> {
         child: StreamBuilder(
           stream: _productListController.streamListProducts,
           initialData: _productListController.products,
-          builder: (context, snapshot) {
-            print("chamou");
-            return ListView(children: data(snapshot.data));
-          }),
+          builder: (context, snapshot) => ListView(children: data(snapshot.data))
         ),
-        backgroundColor: Constants.COLOR_PRIMARY,
+      ),
+      backgroundColor: Constants.COLOR_PRIMARY,
     );
   }
 
