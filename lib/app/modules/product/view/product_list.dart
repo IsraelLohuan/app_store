@@ -1,9 +1,11 @@
+import 'package:appstore/app/models/product.dart';
 import 'package:appstore/app/modules/product/components/card_product.dart';
+import 'package:appstore/app/modules/product/components/header.dart';
+import 'package:appstore/app/modules/product/controllers/product_list_controller.dart';
 import 'package:appstore/app/shared/controllers/product_controller.dart';
 import 'package:appstore/app/shared/others/constants.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ProductList extends StatefulWidget {
   @override
@@ -12,32 +14,33 @@ class ProductList extends StatefulWidget {
 
 class _ProductListState extends State<ProductList> {
 
-  ProductController _productController = BlocProvider.getBloc<ProductController>();
+  ProductListController _productListController = ProductListController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Constants.COLOR_PRIMARY,
-        actions: <Widget>[
-          IconButton(
-            icon: SvgPicture.asset("assets/icons/search.svg"),
-            onPressed: () {},
-          ),
-        ],
-      ),
       body: Padding(
-        padding: EdgeInsets.only(top: 16),
-        child: ListView(
-            children: data()
+        padding: EdgeInsets.only(top: 8),
+        child: StreamBuilder(
+          stream: _productListController.streamListProducts,
+          initialData: _productListController.products,
+          builder: (context, snapshot) {
+            print("chamou");
+            return ListView(children: data(snapshot.data));
+          }),
         ),
-      ),
-      backgroundColor: Constants.COLOR_PRIMARY,
+        backgroundColor: Constants.COLOR_PRIMARY,
     );
   }
 
+  List<Widget> data(List<Product> values) {
+    
+    List<Widget> result = [];
+    
+    result.add(Header(_productListController));
 
-  List<Widget> data() {
-    return _productController.products.map<Widget>((product) => CardProduct(product)).toList();
+    values.forEach((product) => result.add(CardProduct(product)));
+
+    return result;
   }
 }
