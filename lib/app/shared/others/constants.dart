@@ -8,4 +8,7 @@ class Constants {
   static const TYPE_CARD_FEATURED = 1;
   static const TYPE_CARD_PROMOTIONAL = 2;
   static const TYPE_CARD_GENERAL = 3;
+  static const CPF_LENGTH = 11;
+  static const CNPJ_LENGTH = 14;
+  static const MIN_PASSWORD_LENGTH = 5;
 }

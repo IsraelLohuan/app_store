@@ -1,4 +1,4 @@
-import 'package:appstore/app/modules/auth/controllers/auth_controller.dart';
+import 'package:appstore/app/modules/auth/controllers/login_controller.dart';
 import 'package:appstore/app/modules/auth/view/login_page.dart';
 import 'package:appstore/app/modules/auth/view/register_page.dart';
 import 'package:appstore/app/modules/details/view/details_page.dart';
@@ -16,7 +16,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      blocs: [Bloc((i) => AuthController()), Bloc((i) => ProductController())],
+      blocs: [
+        Bloc((i) => LoginController()),
+        Bloc((i) => ProductController())
+      ],
       child: MaterialApp(
         title: 'MaxClock App',
         debugShowCheckedModeBanner: false,

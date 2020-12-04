@@ -2,7 +2,7 @@ import 'package:appstore/app/shared/components/dialog_custom.dart';
 import 'package:appstore/app/shared/components/button_personalized.dart';
 import 'package:appstore/app/modules/auth/components/field_background.dart';
 import 'package:appstore/app/modules/auth/components/line_or.dart';
-import 'package:appstore/app/modules/auth/controllers/auth_controller.dart';
+import 'package:appstore/app/modules/auth/controllers/login_controller.dart';
 import 'package:appstore/app/modules/auth/view/register_page.dart';
 import 'package:appstore/app/modules/main/view/main_page.dart';
 import 'package:appstore/app/shared/others/constants.dart';
@@ -21,7 +21,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  AuthController _authController;
+  LoginController _loginController;
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -29,13 +29,13 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    _authController = BlocProvider.getBloc<AuthController>();
+    _loginController = BlocProvider.getBloc<LoginController>();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Constants.COLOR_PRIMARY,
         body: Padding(
           padding: EdgeInsets.only(right: 25, left: 25, top: 70),
           child: ListView(
@@ -59,18 +59,18 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 16,),
 
               StreamBuilder(
-                stream: _authController.loading,
+                stream: _loginController.loading,
                 initialData: false,
                 builder: (context, snapshot) {
                   return ButtonPersonalized(
                     label: "Logar",
                     loading: snapshot.data,
                     width: MediaQuery.of(context).size.width,
-                    colorButton: Constants.COLOR_PRIMARY,
+                    colorButton: Constants.COLOR_SECONDARY,
                     onPressed: () async {
                       try {
-                        _authController.setLoading(true);
-                        await _authController.login(_emailController.text, _passwordController.text);
+                        _loginController.setLoading(true);
+                        await _loginController.login(_emailController.text, _passwordController.text);
                         Navigator.of(context).pushNamedAndRemoveUntil(MainPage.router, (route) => false);
                       } catch(e) {
                         showDialogCustom(
@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                             DialogCustom(message: messageError((e)),)
                         );
                       } finally {
-                        _authController.setLoading(false);
+                        _loginController.setLoading(false);
                       }
                     },
                   );
@@ -93,8 +93,8 @@ class _LoginPageState extends State<LoginPage> {
 
               ButtonPersonalized(
                 label: "Registrar",
-                colorText: Constants.COLOR_PRIMARY,
-                colorButton: Constants.COLOR_PRIMARY,
+                colorText: Colors.black,
+                colorButton: Colors.white,
                 width: MediaQuery.of(context).size.width,
                 onPressed: () => Navigator.of(context).pushNamed(RegisterPage.router),
                 borderLine: true,

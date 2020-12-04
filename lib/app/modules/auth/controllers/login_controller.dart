@@ -3,7 +3,7 @@ import 'package:appstore/app/models/person.dart';
 import 'package:appstore/app/repositories/auth_repository.dart';
 import 'package:appstore/app/shared/others/helper.dart';
 
-class AuthController {
+class LoginController {
 
   StreamController _streamLoading = StreamController<bool>();
 

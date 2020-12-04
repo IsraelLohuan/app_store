@@ -1,4 +1,4 @@
-import 'package:appstore/app/shared/others/constants.dart';
+
 import 'package:flutter/material.dart';
 
 class LineOr extends StatelessWidget {
@@ -7,11 +7,11 @@ class LineOr extends StatelessWidget {
     return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Expanded(child: Divider(color: Constants.COLOR_PRIMARY,)),
+          Expanded(child: Divider(color: Colors.white,)),
           SizedBox(width: 5,),
-          Text("OU"),
+          Text("OU", style: TextStyle(color: Colors.white),),
           SizedBox(width: 5,),
-          Expanded(child: Divider(color: Constants.COLOR_PRIMARY,)),
+          Expanded(child: Divider(color: Colors.white,)),
         ]
     );
   }
