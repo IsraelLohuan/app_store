@@ -4,6 +4,7 @@ import 'package:appstore/app/shared/components/button_personalized.dart';
 import 'package:appstore/app/shared/others/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class RegisterPage extends StatefulWidget {
 
@@ -52,6 +53,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 label: "Telefone",
                 icon: Icons.phone_android,
                 validator: (String value) => _registerController.validatorPhone(value),
+                inputFormatter: [
+                  MaskTextInputFormatter(
+                      mask: "(##) #####-####"
+                  ),
+                ]
               ),
               SizedBox(height: 16,),
               InputTextRegister(

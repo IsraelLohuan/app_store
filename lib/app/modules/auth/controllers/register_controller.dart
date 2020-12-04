@@ -1,7 +1,20 @@
+import 'package:appstore/app/models/person.dart';
+import 'package:appstore/app/repositories/person_repository.dart';
 import 'package:appstore/app/shared/others/constants.dart';
 import 'package:appstore/app/shared/others/helper.dart';
 
 class RegisterController {
+
+  PersonRepository _personRepository = PersonRepository();
+
+  Future<bool> register() async {
+
+    Person person = Person(
+
+    );
+
+    return await _personRepository.register(person);
+  }
 
   String validatorName(String value) {
     if(value.isEmpty) {
@@ -22,6 +35,10 @@ class RegisterController {
   String validatorPhone(String value) {
     if(value.isEmpty) {
       return "Necessário preencher com seu número!";
+    }
+
+    if(value.length < Constants.PHONE_LENGTH) {
+      return "Número de caracteres inválidos!";
     }
 
     return null;

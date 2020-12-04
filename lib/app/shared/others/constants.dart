@@ -11,4 +11,5 @@ class Constants {
   static const CPF_LENGTH = 11;
   static const CNPJ_LENGTH = 14;
   static const MIN_PASSWORD_LENGTH = 5;
+  static const PHONE_LENGTH = 15;
 }
