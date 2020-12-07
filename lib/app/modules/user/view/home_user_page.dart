@@ -1,8 +1,14 @@
+import 'package:appstore/app/modules/auth/controllers/login_controller.dart';
 import 'package:appstore/app/modules/auth/view/login_page.dart';
+import 'package:appstore/app/modules/auth/view/user_page.dart';
 import 'package:appstore/app/shared/others/constants.dart';
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 
-class UserPage extends StatelessWidget {
+class HomeUserPage extends StatelessWidget {
+
+  final LoginController _loginController = BlocProvider.getBloc<LoginController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +18,7 @@ class UserPage extends StatelessWidget {
           MenuUserPage(
             Icons.person,
             "Meus Dados",
-            () => print("Meus dados")
+            () => Navigator.pushNamed(context, UserPage.router, arguments: _loginController.person)
           ),
           MenuUserPage(
             Icons.shopping_cart,

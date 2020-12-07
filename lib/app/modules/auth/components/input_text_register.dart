@@ -8,8 +8,9 @@ class InputTextRegister extends StatelessWidget {
   final Function validator;
   final List<TextInputFormatter> inputFormatter;
   final TextEditingController controller;
+  final bool enabled;
 
-  InputTextRegister({this.label, this.icon, this.validator, this.inputFormatter, this.controller});
+  InputTextRegister({this.label, this.icon, this.validator, this.inputFormatter, this.controller, this.enabled});
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +40,7 @@ class InputTextRegister extends StatelessWidget {
         color: Colors.white
       ),
       controller: controller,
+      enabled: enabled,
     );
   }
 }

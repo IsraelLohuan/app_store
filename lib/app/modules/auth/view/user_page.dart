@@ -1,5 +1,6 @@
+import 'package:appstore/app/models/person.dart';
 import 'package:appstore/app/modules/auth/components/input_text_register.dart';
-import 'package:appstore/app/modules/auth/controllers/register_controller.dart';
+import 'package:appstore/app/shared/controllers/user_controller.dart';
 import 'package:appstore/app/modules/auth/view/login_page.dart';
 import 'package:appstore/app/shared/components/button_personalized.dart';
 import 'package:appstore/app/shared/components/dialog_custom.dart';
@@ -10,19 +11,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class RegisterPage extends StatefulWidget {
+class UserPage extends StatefulWidget {
 
   static const router = "/register";
 
+  final Person person;
+
+  UserPage({this.person});
+
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  _UserPageState createState() => _UserPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _UserPageState extends State<UserPage> {
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  RegisterController _registerController = RegisterController();
+  UserController _userController;
+
+  @override
+  void initState() {
+    super.initState();
+    _userController = UserController(person: widget.person);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,22 +55,23 @@ class _RegisterPageState extends State<RegisterPage> {
               InputTextRegister(
                 label: "Nome",
                 icon: Icons.supervised_user_circle,
-                validator: (String value) => _registerController.validatorName(value),
-                controller: _registerController.controllersText[0],
+                validator: (String value) => _userController.validatorName(value),
+                controller: _userController.controllersText[0],
               ),
               SizedBox(height: 16,),
               InputTextRegister(
                 label: "Documento",
                 icon: Icons.account_box,
-                validator: (String value) => _registerController.validatorDocument(value),
-                controller: _registerController.controllersText[1],
+                validator: (String value) => _userController.validatorDocument(value),
+                controller: _userController.controllersText[1],
+                enabled: _userController.isEditing == false,
               ),
               SizedBox(height: 16,),
               InputTextRegister(
                 label: "Telefone",
                 icon: Icons.phone_android,
-                validator: (String value) => _registerController.validatorPhone(value),
-                controller: _registerController.controllersText[2],
+                validator: (String value) => _userController.validatorPhone(value),
+                controller: _userController.controllersText[2],
                 inputFormatter: [
                   MaskTextInputFormatter(
                       mask: "(##) #####-####"
@@ -70,27 +82,27 @@ class _RegisterPageState extends State<RegisterPage> {
               InputTextRegister(
                 label: "E-mail",
                 icon: Icons.email,
-                validator: (String value) => _registerController.validatorEmail(value),
-                controller: _registerController.controllersText[3],
+                validator: (String value) => _userController.validatorEmail(value),
+                controller: _userController.controllersText[3],
               ),
               SizedBox(height: 16,),
               InputTextRegister(
                 label: "Senha de Login",
                 icon: Icons.remove_red_eye,
-                validator: (String value) => _registerController.validatorPassword(value),
-                controller: _registerController.controllersText[4],
+                validator: (String value) => _userController.validatorPassword(value),
+                controller: _userController.controllersText[4],
               ),
               SizedBox(height: 16,),
               StreamBuilder(
-                stream: _registerController.loading,
+                stream: _userController.loading,
                 initialData: false,
                 builder: (context, snapshot) {
                   return ButtonPersonalized(
-                    label: "Registrar",
+                    label: _userController.isEditing ? "Editar" : "Registrar",
                     loading: snapshot.data,
                     width: MediaQuery.of(context).size.width,
                     colorButton: Constants.COLOR_SECONDARY,
-                    onPressed: () => _onClickRegister(),
+                    onPressed: () => _userController.isEditing ? null : _onClickRegister(),
                   );
                 },
               )
@@ -104,8 +116,8 @@ class _RegisterPageState extends State<RegisterPage> {
   void _onClickRegister() async {
     if(_formKey.currentState.validate()) {
       try {
-        _registerController.setLoading(true);
-        await _registerController.register();
+        _userController.setLoading(true);
+        await _userController.register();
         showDialogCustom(
             context,
             DialogCustom(
@@ -124,7 +136,7 @@ class _RegisterPageState extends State<RegisterPage> {
           )
         );
       } finally {
-        _registerController.setLoading(false);
+        _userController.setLoading(false);
       }
     }
   }

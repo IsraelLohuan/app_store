@@ -5,7 +5,11 @@ import 'package:appstore/app/shared/others/constants.dart';
 import 'package:appstore/app/shared/others/helper.dart';
 import 'package:flutter/cupertino.dart';
 
-class RegisterController extends LoadingController {
+class UserController extends LoadingController {
+
+  final Person person;
+
+  bool get isEditing => person != null;
 
   PersonRepository _personRepository = PersonRepository();
 
@@ -16,6 +20,16 @@ class RegisterController extends LoadingController {
     TextEditingController(),
     TextEditingController()
   ];
+
+  UserController({this.person}) {
+    if(isEditing) {
+      controllersText[0].text = person.nome;
+      controllersText[1].text = person.documento;
+      controllersText[2].text = person.telefone;
+      controllersText[3].text = person.email;
+      controllersText[4].text = person.senha;
+    }
+  }
 
   Future<bool> register() async {
 

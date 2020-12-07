@@ -1,7 +1,7 @@
 import 'package:appstore/app/modules/home/view/home_page.dart';
 import 'package:appstore/app/modules/main/controllers/main_controller.dart';
 import 'package:appstore/app/modules/product/view/product_list.dart';
-import 'package:appstore/app/modules/user/view/user_page.dart';
+import 'package:appstore/app/modules/user/view/home_user_page.dart';
 import 'package:appstore/app/shared/others/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,7 @@ class _MainPageState extends State<MainPage> {
     HomePage(),
     ProductList(),
     Container(child: Text("PAGE B"),),
-    UserPage()
+    HomeUserPage()
   ];
 
   @override

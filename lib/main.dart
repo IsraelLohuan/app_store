@@ -1,6 +1,6 @@
 import 'package:appstore/app/modules/auth/controllers/login_controller.dart';
 import 'package:appstore/app/modules/auth/view/login_page.dart';
-import 'package:appstore/app/modules/auth/view/register_page.dart';
+import 'package:appstore/app/modules/auth/view/user_page.dart';
 import 'package:appstore/app/modules/details/view/details_page.dart';
 import 'package:appstore/app/modules/main/view/main_page.dart';
 import 'package:appstore/app/shared/controllers/product_controller.dart';
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         initialRoute: LoginPage.router,
         routes: {
           LoginPage.router: (_) => LoginPage(),
-          RegisterPage.router: (_) => RegisterPage(),
+          UserPage.router: (context) => UserPage(person: ModalRoute.of(context).settings.arguments,),
           MainPage.router: (_) => MainPage(),
           DetailsPage.router: (context) => DetailsPage(product: ModalRoute.of(context).settings.arguments,)
         },

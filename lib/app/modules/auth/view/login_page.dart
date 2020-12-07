@@ -1,9 +1,9 @@
+import 'package:appstore/app/modules/auth/view/user_page.dart';
 import 'package:appstore/app/shared/components/dialog_custom.dart';
 import 'package:appstore/app/shared/components/button_personalized.dart';
 import 'package:appstore/app/modules/auth/components/field_background.dart';
 import 'package:appstore/app/modules/auth/components/line_or.dart';
 import 'package:appstore/app/modules/auth/controllers/login_controller.dart';
-import 'package:appstore/app/modules/auth/view/register_page.dart';
 import 'package:appstore/app/modules/main/view/main_page.dart';
 import 'package:appstore/app/shared/others/constants.dart';
 import 'package:appstore/app/shared/others/dialog.dart';
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                 colorText: Colors.black,
                 colorButton: Colors.white,
                 width: MediaQuery.of(context).size.width,
-                onPressed: () => Navigator.of(context).pushNamed(RegisterPage.router),
+                onPressed: () => Navigator.of(context).pushNamed(UserPage.router),
                 borderLine: true,
               )
             ],
