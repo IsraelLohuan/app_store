@@ -102,7 +102,7 @@ class _UserPageState extends State<UserPage> {
                     loading: snapshot.data,
                     width: MediaQuery.of(context).size.width,
                     colorButton: Constants.COLOR_SECONDARY,
-                    onPressed: () => _userController.isEditing ? null : _onClickRegister(),
+                    onPressed: () => _userController.isEditing ? _onClickEdit() : _onClickRegister(),
                   );
                 },
               )
@@ -111,6 +111,34 @@ class _UserPageState extends State<UserPage> {
         )
       )
     );
+  }
+
+  void _onClickEdit() async {
+    if(_formKey.currentState.validate()) {
+      try {
+        _userController.setLoading(true);
+        await _userController.edit();
+        showDialogCustom(
+            context,
+            DialogCustom(
+              message: "Registro atualizado com êxito :)",
+              onCloseDialog: () => Navigator.of(context).pop(),
+              messageButton: "Ok",
+              dialogCustomError: false,
+            )
+        );
+      } catch(e) {
+        showDialogCustom(
+            context,
+            DialogCustom(
+              message: messageError((e)),
+              onCloseDialog: () => Navigator.of(context).pop(),
+            )
+        );
+      } finally {
+        _userController.setLoading(false);
+      }
+    }
   }
 
   void _onClickRegister() async {

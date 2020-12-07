@@ -12,7 +12,7 @@ class LoginController extends LoadingController {
 
   Future login(String email, String password) async {
     validateFields(email, password);
-    person = await _authRepository.login(email, password);
+    setPerson(await _authRepository.login(email, password));
   }
 
   void validateFields(String email, String password) {
@@ -23,5 +23,9 @@ class LoginController extends LoadingController {
     if(!isValidEmail(email)) {
       throw Exception("E-mail em formato inválido!");
     }
+  }
+
+  void setPerson(Person person) {
+    this.person = person;
   }
 }

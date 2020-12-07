@@ -1,8 +1,10 @@
 import 'package:appstore/app/models/person.dart';
+import 'package:appstore/app/modules/auth/controllers/login_controller.dart';
 import 'package:appstore/app/repositories/person_repository.dart';
 import 'package:appstore/app/shared/controllers/loading_controller.dart';
 import 'package:appstore/app/shared/others/constants.dart';
 import 'package:appstore/app/shared/others/helper.dart';
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/cupertino.dart';
 
 class UserController extends LoadingController {
@@ -31,9 +33,9 @@ class UserController extends LoadingController {
     }
   }
 
-  Future<bool> register() async {
+  Future<void> register() async {
 
-    Person person = Person(
+    Person _person = Person(
       nome: controllersText[0].text,
       documento: controllersText[1].text,
       telefone: controllersText[2].text,
@@ -44,7 +46,28 @@ class UserController extends LoadingController {
       deleted: "0",
     );
 
-    return await _personRepository.register(person);
+    await _personRepository.insert(_person);
+  }
+
+  Future<void> edit() async {
+
+    LoginController loginController = BlocProvider.getBloc<LoginController>();
+
+    Person _person = Person(
+      id: person.id,
+      nome: controllersText[0].text,
+      documento: controllersText[1].text,
+      telefone: controllersText[2].text,
+      email: controllersText[3].text,
+      senha: controllersText[4].text,
+      fileName: "default.png",
+      admin: "0",
+      deleted: "0"
+    );
+
+    await _personRepository.update(_person);
+
+    loginController.setPerson(_person);
   }
 
   String validatorName(String value) {
