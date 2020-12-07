@@ -1,5 +1,6 @@
 import 'package:appstore/app/models/person.dart';
 import 'package:appstore/app/modules/auth/components/input_text_register.dart';
+import 'package:appstore/app/shared/components/icon_back.dart';
 import 'package:appstore/app/shared/controllers/user_controller.dart';
 import 'package:appstore/app/modules/auth/view/login_page.dart';
 import 'package:appstore/app/shared/components/button_personalized.dart';
@@ -41,10 +42,7 @@ class _UserPageState extends State<UserPage> {
       backgroundColor: Constants.COLOR_PRIMARY,
       appBar: AppBar(
         elevation: 0,
-        leading: IconButton(
-          icon: SvgPicture.asset("assets/icons/back.svg", color: Colors.white),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        leading: IconBack()
       ),
       body: Padding(
         padding: EdgeInsets.all(16),

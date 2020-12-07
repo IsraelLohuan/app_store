@@ -1,3 +1,4 @@
+import 'package:appstore/app/modules/address/view/address_list.dart';
 import 'package:appstore/app/modules/auth/controllers/login_controller.dart';
 import 'package:appstore/app/modules/auth/view/login_page.dart';
 import 'package:appstore/app/modules/auth/view/user_page.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
           LoginPage.router: (_) => LoginPage(),
           UserPage.router: (context) => UserPage(person: ModalRoute.of(context).settings.arguments,),
           MainPage.router: (_) => MainPage(),
-          DetailsPage.router: (context) => DetailsPage(product: ModalRoute.of(context).settings.arguments,)
+          DetailsPage.router: (context) => DetailsPage(product: ModalRoute.of(context).settings.arguments,),
+          AddressList.router: (context) => AddressList()
         },
       ),
     );

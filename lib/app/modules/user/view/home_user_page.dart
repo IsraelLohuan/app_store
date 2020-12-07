@@ -1,3 +1,4 @@
+import 'package:appstore/app/modules/address/view/address_list.dart';
 import 'package:appstore/app/modules/auth/controllers/login_controller.dart';
 import 'package:appstore/app/modules/auth/view/login_page.dart';
 import 'package:appstore/app/modules/auth/view/user_page.dart';
@@ -28,7 +29,7 @@ class HomeUserPage extends StatelessWidget {
           MenuUserPage(
             Icons.location_on,
             "Endereços",
-            () => print("Endereço"),
+            () => Navigator.pushNamed(context, AddressList.router),
           ),
           MenuUserPage(
             Icons.exit_to_app,
