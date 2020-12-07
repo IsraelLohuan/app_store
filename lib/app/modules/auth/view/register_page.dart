@@ -1,7 +1,11 @@
 import 'package:appstore/app/modules/auth/components/input_text_register.dart';
 import 'package:appstore/app/modules/auth/controllers/register_controller.dart';
+import 'package:appstore/app/modules/auth/view/login_page.dart';
 import 'package:appstore/app/shared/components/button_personalized.dart';
+import 'package:appstore/app/shared/components/dialog_custom.dart';
 import 'package:appstore/app/shared/others/constants.dart';
+import 'package:appstore/app/shared/others/dialog.dart';
+import 'package:appstore/app/shared/others/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -77,14 +81,17 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: _registerController.controllersText[4],
               ),
               SizedBox(height: 16,),
-              ButtonPersonalized(
-                label: "Registrar",
-                width: MediaQuery.of(context).size.width,
-                colorButton: Constants.COLOR_SECONDARY,
-                onPressed: () async {
-                  if(_formKey.currentState.validate()) {
-                      await _registerController.register();
-                  }
+              StreamBuilder(
+                stream: _registerController.loading,
+                initialData: false,
+                builder: (context, snapshot) {
+                  return ButtonPersonalized(
+                    label: "Registrar",
+                    loading: snapshot.data,
+                    width: MediaQuery.of(context).size.width,
+                    colorButton: Constants.COLOR_SECONDARY,
+                    onPressed: () => _onClickRegister(),
+                  );
                 },
               )
             ],
@@ -92,5 +99,33 @@ class _RegisterPageState extends State<RegisterPage> {
         )
       )
     );
+  }
+
+  void _onClickRegister() async {
+    if(_formKey.currentState.validate()) {
+      try {
+        _registerController.setLoading(true);
+        await _registerController.register();
+        showDialogCustom(
+            context,
+            DialogCustom(
+              message: "Olá, seu registro foi efetuado com êxito :)\n\n Vamos Logar?",
+              onCloseDialog: () => Navigator.of(context).pushNamedAndRemoveUntil(LoginPage.router, (route) => false),
+              messageButton: "Logar",
+              dialogCustomError: false,
+          )
+        );
+      } catch(e) {
+        showDialogCustom(
+            context,
+            DialogCustom(
+              message: messageError((e)),
+              onCloseDialog: () => Navigator.of(context).pop(),
+          )
+        );
+      } finally {
+        _registerController.setLoading(false);
+      }
+    }
   }
 }

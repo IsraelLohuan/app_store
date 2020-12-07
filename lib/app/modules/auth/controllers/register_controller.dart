@@ -1,10 +1,11 @@
 import 'package:appstore/app/models/person.dart';
 import 'package:appstore/app/repositories/person_repository.dart';
+import 'package:appstore/app/shared/controllers/loading_controller.dart';
 import 'package:appstore/app/shared/others/constants.dart';
 import 'package:appstore/app/shared/others/helper.dart';
 import 'package:flutter/cupertino.dart';
 
-class RegisterController {
+class RegisterController extends LoadingController {
 
   PersonRepository _personRepository = PersonRepository();
 

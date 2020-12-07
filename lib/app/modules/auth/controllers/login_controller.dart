@@ -1,21 +1,14 @@
 import 'dart:async';
 import 'package:appstore/app/models/person.dart';
 import 'package:appstore/app/repositories/auth_repository.dart';
+import 'package:appstore/app/shared/controllers/loading_controller.dart';
 import 'package:appstore/app/shared/others/helper.dart';
 
-class LoginController {
-
-  StreamController _streamLoading = StreamController<bool>();
-
-  Stream get loading => _streamLoading.stream;
+class LoginController extends LoadingController {
 
   AuthRepository _authRepository = AuthRepository();
 
   Person person;
-
-  void setLoading(bool value) {
-    _streamLoading.add(value);
-  }
 
   Future login(String email, String password) async {
     validateFields(email, password);
@@ -30,9 +23,5 @@ class LoginController {
     if(!isValidEmail(email)) {
       throw Exception("E-mail em formato inválido!");
     }
-  }
-
-  void dispose() {
-    _streamLoading.close();
   }
 }

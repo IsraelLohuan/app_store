@@ -67,20 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                     loading: snapshot.data,
                     width: MediaQuery.of(context).size.width,
                     colorButton: Constants.COLOR_SECONDARY,
-                    onPressed: () async {
-                      try {
-                        _loginController.setLoading(true);
-                        await _loginController.login(_emailController.text, _passwordController.text);
-                        Navigator.of(context).pushNamedAndRemoveUntil(MainPage.router, (route) => false);
-                      } catch(e) {
-                        showDialogCustom(
-                            context,
-                            DialogCustom(message: messageError((e)),)
-                        );
-                      } finally {
-                        _loginController.setLoading(false);
-                      }
-                    },
+                    onPressed: () => _onClickLogin(),
                   );
                 },
               ),
@@ -103,6 +90,24 @@ class _LoginPageState extends State<LoginPage> {
           ),
         )
     );
+  }
+
+  void _onClickLogin() async {
+    try {
+      _loginController.setLoading(true);
+      await _loginController.login(_emailController.text, _passwordController.text);
+      Navigator.of(context).pushNamedAndRemoveUntil(MainPage.router, (route) => false);
+    } catch(e) {
+      showDialogCustom(
+          context,
+          DialogCustom(
+            message: messageError((e)),
+            onCloseDialog: () => Navigator.of(context).pop(),
+          )
+      );
+    } finally {
+      _loginController.setLoading(false);
+    }
   }
 }
 

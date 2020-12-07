@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 class DialogCustom extends StatelessWidget {
 
   final String message;
+  final String messageButton;
+  final bool dialogCustomError;
+  final Function onCloseDialog;
 
-  DialogCustom({this.message});
+  DialogCustom({this.message, this.messageButton = "Fechar", this.dialogCustomError = true, this.onCloseDialog});
 
   @override
   Widget build(BuildContext context) {
@@ -14,29 +17,59 @@ class DialogCustom extends StatelessWidget {
         height: 300,
         child: ListView(
           children: <Widget>[
-            _header(context),
-            _alert(context)
+            HeaderDialog(
+              icon: dialogCustomError ? Icons.cancel : Icons.check,
+              color: dialogCustomError ? Constants.COLOR_SECONDARY : Colors.green,
+            ),
+            ContentDialog(
+              messageButton: messageButton,
+              messageTop: dialogCustomError ? "Ops !!" : "Sucesso !!",
+              message: message,
+              onCloseDialog: onCloseDialog,
+              colorButtonClose: dialogCustomError == true ? Constants.COLOR_SECONDARY : Colors.green,
+            )
           ],
         ),
       ),
     );
   }
+}
 
-  Widget _header(BuildContext context) {
+class HeaderDialog extends StatelessWidget {
+
+  final IconData icon;
+  final Color color;
+
+  HeaderDialog({@required this.icon, @required this.color});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      color: Constants.COLOR_SECONDARY,
+      color: color,
       height: 300/2,
       child: Center(
         child: Icon(
-          Icons.cancel,
+          icon,
           color: Colors.white,
           size: 80,
         ),
       ),
     );
   }
+}
 
-  Widget _alert(BuildContext context) {
+class ContentDialog extends StatelessWidget {
+
+  final String messageTop;
+  final String message;
+  final String messageButton;
+  final Function onCloseDialog;
+  final Color colorButtonClose;
+
+  ContentDialog({this.messageButton, this.messageTop, this.message, this.onCloseDialog, this.colorButtonClose});
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(16),
       child: Column(
@@ -44,12 +77,12 @@ class DialogCustom extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-              "Ops !!",
-              style: TextStyle(
+            messageTop,
+            style: TextStyle(
                 color: Constants.COLOR_PRIMARY,
                 fontWeight: FontWeight.bold,
                 fontSize: 17
-              ),
+            ),
           ),
           SizedBox(height: 16,),
           Text(
@@ -62,20 +95,16 @@ class DialogCustom extends StatelessWidget {
           ),
           SizedBox(height: 16,),
           Container(
-            child: RaisedButton.icon(
+            child: RaisedButton(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                color: Constants.COLOR_SECONDARY,
-                onPressed: () => Navigator.of(context).pop(),
-                icon: Icon(
-                    Icons.close,
-                    color: Colors.white,
-                ),
-                label: Text(
-                  "Fechar",
+                color: colorButtonClose,
+                onPressed: onCloseDialog,
+                child: Text(
+                  messageButton,
                   style: TextStyle(
-                    color: Colors.white
+                      color: Colors.white
                   ),
                 )
             ),
@@ -85,3 +114,4 @@ class DialogCustom extends StatelessWidget {
     );
   }
 }
+
