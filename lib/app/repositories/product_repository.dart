@@ -1,17 +1,20 @@
+import 'dart:convert';
 import 'package:appstore/app/models/product.dart';
-import 'package:appstore/app/shared/others/dio_custom.dart';
-import 'package:dio/dio.dart';
+import 'package:appstore/app/shared/others/helper.dart';
+import 'package:http/http.dart' as http;
 
-class ProductRepository extends DioCustom {
-
-  ProductRepository() : super();
+class ProductRepository {
 
   Future<List<Product>> getAll() async {
 
-    Response value = await dio.get("/products");
+    final response = await http.get(
+        getEndpointApi("/products")
+    );
 
-    if(value.statusCode == 200) {
-      return value.data.map<Product>((product) => Product.fromJson(product)).toList();
+
+    if(response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return data.map<Product>((product) => Product.fromJson(product)).toList();
     }
 
     return [];

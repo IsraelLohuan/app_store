@@ -2,15 +2,31 @@ import 'package:appstore/app/models/person.dart';
 import 'package:appstore/app/repositories/person_repository.dart';
 import 'package:appstore/app/shared/others/constants.dart';
 import 'package:appstore/app/shared/others/helper.dart';
+import 'package:flutter/cupertino.dart';
 
 class RegisterController {
 
   PersonRepository _personRepository = PersonRepository();
 
+  List<TextEditingController> controllersText = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController()
+  ];
+
   Future<bool> register() async {
 
     Person person = Person(
-
+      nome: controllersText[0].text,
+      documento: controllersText[1].text,
+      telefone: controllersText[2].text,
+      email: controllersText[3].text,
+      senha: controllersText[4].text,
+      fileName: "default.png",
+      admin: "0",
+      deleted: "0",
     );
 
     return await _personRepository.register(person);

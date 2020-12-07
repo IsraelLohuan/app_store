@@ -1,21 +1,22 @@
 import 'dart:convert';
-
 import 'package:appstore/app/models/person.dart';
-import 'package:appstore/app/shared/others/dio_custom.dart';
-import 'package:dio/dio.dart';
+import 'package:appstore/app/shared/others/helper.dart';
+import 'package:http/http.dart' as http;
 
-class PersonRepository extends DioCustom {
-
-  PersonRepository() : super();
+class PersonRepository {
 
   Future<bool> register(Person person) async {
 
-    Response value = await dio.post("/person", data: json.encode(person));
+    final response = await http.post(
+        getEndpointApi("/person"),
+        headers: {"Content-Type": "application/json"},
+        body: json.encode(person)
+    );
 
-    if(value.statusCode == 200 || value.statusCode == 201) {
+    if(response.statusCode == 200 || response.statusCode == 201) {
       return true;
     }
 
-    throw Exception(value.data);
+    throw Exception(response.body);
   }
 }

@@ -41,18 +41,21 @@ class _RegisterPageState extends State<RegisterPage> {
                 label: "Nome",
                 icon: Icons.supervised_user_circle,
                 validator: (String value) => _registerController.validatorName(value),
+                controller: _registerController.controllersText[0],
               ),
               SizedBox(height: 16,),
               InputTextRegister(
                 label: "Documento",
                 icon: Icons.account_box,
                 validator: (String value) => _registerController.validatorDocument(value),
+                controller: _registerController.controllersText[1],
               ),
               SizedBox(height: 16,),
               InputTextRegister(
                 label: "Telefone",
                 icon: Icons.phone_android,
                 validator: (String value) => _registerController.validatorPhone(value),
+                controller: _registerController.controllersText[2],
                 inputFormatter: [
                   MaskTextInputFormatter(
                       mask: "(##) #####-####"
@@ -64,21 +67,23 @@ class _RegisterPageState extends State<RegisterPage> {
                 label: "E-mail",
                 icon: Icons.email,
                 validator: (String value) => _registerController.validatorEmail(value),
+                controller: _registerController.controllersText[3],
               ),
               SizedBox(height: 16,),
               InputTextRegister(
                 label: "Senha de Login",
                 icon: Icons.remove_red_eye,
                 validator: (String value) => _registerController.validatorPassword(value),
+                controller: _registerController.controllersText[4],
               ),
               SizedBox(height: 16,),
               ButtonPersonalized(
                 label: "Registrar",
                 width: MediaQuery.of(context).size.width,
                 colorButton: Constants.COLOR_SECONDARY,
-                onPressed: () {
+                onPressed: () async {
                   if(_formKey.currentState.validate()) {
-
+                      await _registerController.register();
                   }
                 },
               )

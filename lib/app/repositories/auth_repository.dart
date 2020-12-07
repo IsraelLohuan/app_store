@@ -1,23 +1,25 @@
+import 'dart:convert';
 import 'package:appstore/app/models/person.dart';
-import 'package:appstore/app/shared/others/dio_custom.dart';
-import 'package:dio/dio.dart';
+import 'package:appstore/app/shared/others/helper.dart';
+import 'package:http/http.dart' as http;
 
-class AuthRepository extends DioCustom {
-
-  AuthRepository() : super();
+class AuthRepository {
 
   Future<Person> login(String email, String password) async {
 
-     Response value = await dio.get("/auth/${email}/${password}");
+     final response = await http.get(
+       getEndpointApi("/auth/${email}/${password}")
+     );
 
-     if(value.statusCode == 200) {
-       return Person.fromJson(value.data.first);
+     if(response.statusCode == 200) {
+       final data = json.decode(response.body);
+       return Person.fromJson(data[0]);
      }
 
-     if(value.statusCode == 204) {
+     if(response.statusCode == 204) {
        throw Exception("Email ou senha incorreto(s) :(");
      }
 
-     throw Exception("OPA! Algo de inesperado ocorreu! Code: ${value.statusCode}");
+     throw Exception("OPA! Algo de inesperado ocorreu! Code: ${response.statusCode}");
   }
 }

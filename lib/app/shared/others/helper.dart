@@ -5,7 +5,11 @@ import 'package:appstore/app/models/product.dart';
 import 'package:appstore/app/shared/others/constants.dart';
 import 'package:intl/intl.dart';
 
-String messageError(Exception messageException) {
+String getEndpointApi(String endpoint) {
+  return Constants.API_BASE_URL + endpoint;
+}
+
+String messageError(messageException) {
   return messageException.toString().replaceAll("Exception:", "");
 }
 
@@ -40,7 +44,7 @@ int getTypeCard(Product product) {
   if(product.desconto > 0)
     return Constants.TYPE_CARD_PROMOTIONAL;
 
-  if(product.destaque == true)
+  if(product.destaque)
     return Constants.TYPE_CARD_FEATURED;
 
   return Constants.TYPE_CARD_GENERAL;

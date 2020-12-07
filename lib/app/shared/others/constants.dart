@@ -12,4 +12,5 @@ class Constants {
   static const CNPJ_LENGTH = 14;
   static const MIN_PASSWORD_LENGTH = 5;
   static const PHONE_LENGTH = 15;
+  static const API_BASE_URL = "http://10.0.2.2/api-store";
 }
