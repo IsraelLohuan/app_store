@@ -1,5 +1,6 @@
 import 'package:appstore/app/modules/cart/view/cart_page.dart';
 import 'package:appstore/app/modules/home/view/home_page.dart';
+import 'package:appstore/app/modules/main/components/cart_icon.dart';
 import 'package:appstore/app/modules/main/controllers/main_controller.dart';
 import 'package:appstore/app/modules/product/view/product_list.dart';
 import 'package:appstore/app/modules/profile/view/profile_page.dart';
@@ -46,7 +47,7 @@ class _MainPageState extends State<MainPage> {
                   title: Text("Produtos",),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart),
+                  icon: CartIcon(),
                   title: Text("Carrinho"),
                 ),
                 BottomNavigationBarItem(

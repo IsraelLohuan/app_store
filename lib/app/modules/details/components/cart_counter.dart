@@ -25,6 +25,7 @@ class _CartCounterState extends State<CartCounter> {
       children: <Widget>[
         BuildOutlineButton(
             icon: Icons.remove,
+            onPressed: () => setState(() => _cartController.decrementQuantityProduct(product)),
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16/2),
