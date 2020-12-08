@@ -1,5 +1,5 @@
 import 'package:appstore/app/models/person.dart';
-import 'package:appstore/app/modules/auth/components/input_text_register.dart';
+import 'package:appstore/app/shared/components/input_text_costumer.dart';
 import 'package:appstore/app/shared/components/icon_back.dart';
 import 'package:appstore/app/shared/controllers/user_controller.dart';
 import 'package:appstore/app/modules/auth/view/login_page.dart';
@@ -9,7 +9,6 @@ import 'package:appstore/app/shared/others/constants.dart';
 import 'package:appstore/app/shared/others/dialog.dart';
 import 'package:appstore/app/shared/others/helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class UserPage extends StatefulWidget {
@@ -50,14 +49,14 @@ class _UserPageState extends State<UserPage> {
           key: _formKey,
           child: ListView(
             children: <Widget>[
-              InputTextRegister(
+              InputTextCostumer(
                 label: "Nome",
                 icon: Icons.supervised_user_circle,
                 validator: (String value) => _userController.validatorName(value),
                 controller: _userController.controllersText[0],
               ),
               SizedBox(height: 16,),
-              InputTextRegister(
+              InputTextCostumer(
                 label: "Documento",
                 icon: Icons.account_box,
                 validator: (String value) => _userController.validatorDocument(value),
@@ -65,7 +64,7 @@ class _UserPageState extends State<UserPage> {
                 enabled: _userController.isEditing == false,
               ),
               SizedBox(height: 16,),
-              InputTextRegister(
+              InputTextCostumer(
                 label: "Telefone",
                 icon: Icons.phone_android,
                 validator: (String value) => _userController.validatorPhone(value),
@@ -77,14 +76,14 @@ class _UserPageState extends State<UserPage> {
                 ]
               ),
               SizedBox(height: 16,),
-              InputTextRegister(
+              InputTextCostumer(
                 label: "E-mail",
                 icon: Icons.email,
                 validator: (String value) => _userController.validatorEmail(value),
                 controller: _userController.controllersText[3],
               ),
               SizedBox(height: 16,),
-              InputTextRegister(
+              InputTextCostumer(
                 label: "Senha de Login",
                 icon: Icons.remove_red_eye,
                 validator: (String value) => _userController.validatorPassword(value),

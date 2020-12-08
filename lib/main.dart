@@ -1,4 +1,6 @@
+import 'package:appstore/app/modules/address/controllers/address_controller.dart';
 import 'package:appstore/app/modules/address/view/address_list.dart';
+import 'package:appstore/app/modules/address/view/address_page.dart';
 import 'package:appstore/app/modules/auth/controllers/login_controller.dart';
 import 'package:appstore/app/modules/auth/view/login_page.dart';
 import 'package:appstore/app/modules/auth/view/user_page.dart';
@@ -19,7 +21,8 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       blocs: [
         Bloc((i) => LoginController()),
-        Bloc((i) => ProductController())
+        Bloc((i) => ProductController()),
+        Bloc((i) => AddressController())
       ],
       child: MaterialApp(
         title: 'MaxClock App',
@@ -31,7 +34,8 @@ class MyApp extends StatelessWidget {
           UserPage.router: (context) => UserPage(person: ModalRoute.of(context).settings.arguments,),
           MainPage.router: (_) => MainPage(),
           DetailsPage.router: (context) => DetailsPage(product: ModalRoute.of(context).settings.arguments,),
-          AddressList.router: (context) => AddressList()
+          AddressList.router: (context) => AddressList(),
+          AddressPage.router: (context) => AddressPage(address: ModalRoute.of(context).settings.arguments,)
         },
       ),
     );

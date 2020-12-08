@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class InputTextRegister extends StatelessWidget {
+class InputTextCostumer extends StatelessWidget {
 
   final IconData icon;
   final String label;
@@ -10,7 +10,7 @@ class InputTextRegister extends StatelessWidget {
   final TextEditingController controller;
   final bool enabled;
 
-  InputTextRegister({this.label, this.icon, this.validator, this.inputFormatter, this.controller, this.enabled});
+  InputTextCostumer({this.label, this.icon, this.validator, this.inputFormatter, this.controller, this.enabled});
 
   @override
   Widget build(BuildContext context) {
