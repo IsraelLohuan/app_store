@@ -28,19 +28,6 @@ class DetailsPage extends StatelessWidget {
         icon: SvgPicture.asset("assets/icons/back.svg", color: Colors.white),
         onPressed: () => Navigator.of(context).pop(),
       ),
-      actions: <Widget>[
-        IconButton(
-          icon: SvgPicture.asset("assets/icons/search.svg"),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: SvgPicture.asset("assets/icons/cart.svg"),
-          onPressed: () {},
-        ),
-        SizedBox(
-          width: 16 / 2,
-        )
-      ],
     );
   }
 }

@@ -45,7 +45,7 @@ class AddressRepository {
     }
 
     if(response.statusCode == 204) {
-      throw Exception("Voce nao possui endereco cadastrado!");
+      throw Exception("Você não possui endereço cadastrado!");
     }
 
     throw Exception("OPA! Algo de inesperado ocorreu! Code: ${response.statusCode}");

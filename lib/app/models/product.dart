@@ -1,5 +1,6 @@
 class Product {
   int id;
+  int cartQuantity;
   double preco;
   double desconto;
   String descricao;

@@ -1,5 +1,4 @@
 import 'package:appstore/app/models/product.dart';
-import 'package:appstore/app/modules/details/components/add_to_cart.dart';
 import 'package:appstore/app/modules/details/components/count_with_fav_btn.dart';
 import 'package:appstore/app/modules/details/components/description.dart';
 import 'package:appstore/app/modules/details/components/product_title_with_image.dart';
@@ -42,7 +41,6 @@ class Body extends StatelessWidget {
                       Description(product),
                       CountWithFavBtn(),
                       Padding(padding: EdgeInsets.symmetric(vertical: 16)),
-                      AddToCart(product)
                     ],
                   ),
                 ),
