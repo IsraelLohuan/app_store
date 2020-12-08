@@ -39,7 +39,7 @@ class Body extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Description(product),
-                      CountWithFavBtn(),
+                      CountWithFavBtn(product),
                       Padding(padding: EdgeInsets.symmetric(vertical: 16)),
                     ],
                   ),

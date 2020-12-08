@@ -1,25 +1,56 @@
+import 'package:appstore/app/models/product.dart';
+import 'package:appstore/app/modules/cart/controller/cart_controller.dart';
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 
-class CartCounter extends StatelessWidget {
+class CartCounter extends StatefulWidget {
+
+  final Product product;
+
+  CartCounter(this.product);
+
+  @override
+  _CartCounterState createState() => _CartCounterState();
+}
+
+class _CartCounterState extends State<CartCounter> {
+
+  CartController _cartController = BlocProvider.getBloc<CartController>();
+
+  Product get product => widget.product;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        _buildOutlineButton(
-          icon: Icons.remove
+        BuildOutlineButton(
+            icon: Icons.remove,
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16/2),
-          child: Text("01", style: Theme.of(context).textTheme.headline6,),
+          child: Text(
+              _cartController.getQuantityProductInCart(product).toString(),
+              style: Theme.of(context).textTheme.headline6
+          ),
         ),
-        _buildOutlineButton(
-            icon: Icons.add
+        BuildOutlineButton(
+            icon: Icons.add,
+            onPressed: () => setState(() => _cartController.incrementQuantityProduct(product))
         ),
       ],
     );
   }
+}
 
-  Widget _buildOutlineButton({IconData icon, Function onPressed}) {
+class BuildOutlineButton extends StatelessWidget {
+
+  final IconData icon;
+  final Function onPressed;
+
+  BuildOutlineButton({this.icon, this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
       width: 40,
       height: 32,
@@ -34,3 +65,4 @@ class CartCounter extends StatelessWidget {
     );
   }
 }
+

@@ -10,12 +10,10 @@ class CartController {
 
   void incrementQuantityProduct(Product product) {
 
-    int id = product.id;
-
-    if(!productInCart(id)) {
+    if(!productInCart(product.id)) {
       addProduct(product);
     } else {
-      int index = getIndexProduct(id);
+      int index = getIndexProduct(product.id);
       _cartProducts[index].cartQuantity ++;
     }
   }
@@ -24,8 +22,17 @@ class CartController {
     product.cartQuantity --;
   }
 
+  int getQuantityProductInCart(Product product) {
+
+    if(!productInCart(product.id))
+      return 0;
+
+    int index = getIndexProduct(product.id);
+    return _cartProducts[index].cartQuantity;
+  }
+
   bool productInCart(int id) {
-    return _cartProducts.firstWhere((product) => product.id == id) != null;
+    return _cartProducts.firstWhere((product) => product.id == id, orElse: () => null) != null;
   }
 
   int getIndexProduct(int id) {

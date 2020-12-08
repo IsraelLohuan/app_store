@@ -4,6 +4,7 @@ import 'package:appstore/app/modules/address/view/address_page.dart';
 import 'package:appstore/app/modules/auth/controllers/login_controller.dart';
 import 'package:appstore/app/modules/auth/view/login_page.dart';
 import 'package:appstore/app/modules/auth/view/user_page.dart';
+import 'package:appstore/app/modules/cart/controller/cart_controller.dart';
 import 'package:appstore/app/modules/details/view/details_page.dart';
 import 'package:appstore/app/modules/main/view/main_page.dart';
 import 'package:appstore/app/shared/controllers/product_controller.dart';
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       blocs: [
         Bloc((i) => LoginController()),
         Bloc((i) => ProductController()),
-        Bloc((i) => AddressController())
+        Bloc((i) => AddressController()),
+        Bloc((i) => CartController())
       ],
       child: MaterialApp(
         title: 'MaxClock App',
