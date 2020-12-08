@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:appstore/app/models/product.dart';
 
 class CartController {
@@ -16,26 +15,28 @@ class CartController {
   }
 
   void incrementQuantityProduct(Product product) {
-
     if(!productInCart(product.id)) {
       addProduct(product);
     } else {
-      int index = getIndexProduct(product.id);
-      _cartProducts[index].cartQuantity ++;
+      Product _product = getProductByIndex(product.id);
+      _product.cartQuantity ++;
     }
 
     _streamCounter.add(_cartProducts.length);
   }
 
   void decrementQuantityProduct(Product product) {
+    if(productInCart(product.id)) {
 
-    product.cartQuantity --;
+      Product _product = getProductByIndex(product.id);
+      _product.cartQuantity --;
 
-    if(product.cartQuantity == 0) {
-      _cartProducts.removeAt(getIndexProduct(product.id));
+      if(_product.cartQuantity == 0) {
+        _cartProducts.removeAt(getIndexProduct(_product.id));
+      }
+
+      _streamCounter.add(_cartProducts.length);
     }
-
-    _streamCounter.add(_cartProducts.length);
   }
 
   int getQuantityProductInCart(Product product) {
