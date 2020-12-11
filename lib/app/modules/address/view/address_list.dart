@@ -5,7 +5,7 @@ import 'package:appstore/app/modules/address/view/address_page.dart';
 import 'package:appstore/app/shared/components/icon_back.dart';
 import 'package:appstore/app/shared/components/progress_custom.dart';
 import 'package:appstore/app/shared/others/constants.dart';
-import 'package:appstore/app/shared/others/error_component.dart';
+import 'package:appstore/app/shared/components/error_component.dart';
 import 'package:appstore/app/shared/others/helper.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +13,10 @@ import 'package:flutter/material.dart';
 class AddressList extends StatefulWidget {
 
   static const router = "/addresslist";
+
+  final bool addAddressInOrder;
+
+  AddressList({this.addAddressInOrder});
 
   @override
   _AddressListState createState() => _AddressListState();
@@ -57,7 +61,10 @@ class _AddressListState extends State<AddressList> {
 
           return ListView.builder(
             itemCount: list.length,
-            itemBuilder: (BuildContext context, int index) => CardAddress(address: list[index],),
+            itemBuilder: (BuildContext context, int index) => CardAddress(
+              address: list[index],
+              addAddressInOrder: widget.addAddressInOrder ?? false,
+            ),
           );
         },
       ),

@@ -2,6 +2,7 @@
 import 'package:appstore/app/modules/home/components/header_image.dart';
 import 'package:appstore/app/modules/home/components/row_category.dart';
 import 'package:appstore/app/modules/home/controllers/home_controller.dart';
+import 'package:appstore/app/shared/components/error_component.dart';
 import 'package:appstore/app/shared/components/progress_custom.dart';
 import 'package:flutter/material.dart';
 
@@ -25,21 +26,21 @@ class _HomePageState extends State<HomePage> {
           builder: (context, snapshot) {
 
             if(snapshot.hasError) {
-              return Padding(
-                padding: EdgeInsets.only(top: 16),
-                child: Center(
-                  child: Text(
-                    "OPA! Não foi possível carregar os produtos!",
-                    style: TextStyle(
-                        color: Colors.white
-                    ),
-                  ),
-                ),
+              return ErrorComponent(
+                message: "OPA! Não foi possível carregar os produtos!",
+                onPressed: () => _homeController.searchAllProducts(),
               );
             }
 
             if(!snapshot.hasData) {
               return ProgressCustom();
+            }
+
+            if(snapshot.data.isEmpty) {
+              return ErrorComponent(
+                message: "Não há produto registrado :/",
+                onPressed: () => _homeController.searchAllProducts(),
+              );
             }
 
             return Column(

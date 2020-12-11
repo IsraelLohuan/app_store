@@ -52,25 +52,10 @@ class _RowCategoryState extends State<RowCategory> {
               style: TextStyle(
                   color: Colors.white, fontFamily: "Oswald", fontSize: 30),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Text(
-                  subTitleCategory,
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w100),
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Visualizar Todos",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300,
-                      fontSize: 13),
-                )
-              ],
+            Text(
+              subTitleCategory,
+              style: TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w100),
             )
           ],
         ),

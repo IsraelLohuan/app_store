@@ -1,6 +1,7 @@
 import 'package:appstore/app/models/address.dart';
 import 'package:appstore/app/modules/address/controllers/address_controller.dart';
 import 'package:appstore/app/modules/address/view/address_page.dart';
+import 'package:appstore/app/shared/controllers/cart_controller.dart';
 import 'package:appstore/app/shared/mixins/dialog_mixin.dart';
 import 'package:appstore/app/shared/others/constants.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
@@ -9,10 +10,11 @@ import 'package:flutter/material.dart';
 class CardAddress extends StatelessWidget with DialogMixin {
 
   final Address address;
+  final bool addAddressInOrder;
 
   AddressController _addressController;
 
-  CardAddress({this.address}) {
+  CardAddress({this.address, this.addAddressInOrder = false}) {
     _addressController = AddressController(address: address);
   }
 
@@ -23,24 +25,27 @@ class CardAddress extends StatelessWidget with DialogMixin {
       child: Container(
         height: 80,
         child: Card(
-          color: Constants.COLOR_PRIMARY,
+          color: Colors.white,
           child: ListTile(
             leading: Icon(
                 Icons.location_on,
-                color: Colors.white,
+                color: Colors.grey,
             ),
             title: Text(
               address.descricao,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold
+              ),
             ),
             subtitle: Text(
               address.logradouro,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.grey),
             ),
             trailing: InkWell(
               child: Icon(
                 Icons.delete,
-                color: Colors.redAccent,
+                color: Colors.grey,
               ),
               onTap: () => showDialog(
                 context: context,
@@ -93,7 +98,14 @@ class CardAddress extends StatelessWidget with DialogMixin {
                 }
               ),
             ),
-            onTap: () => Navigator.pushNamed(context, AddressPage.router, arguments: address),
+            onTap: () {
+              if(addAddressInOrder) {
+                BlocProvider.getBloc<CartController>().setAddress(address);
+                Navigator.pop(context);
+              } else {
+                Navigator.pushNamed(context, AddressPage.router, arguments: address);
+              }
+            },
           ),
         ),
       )

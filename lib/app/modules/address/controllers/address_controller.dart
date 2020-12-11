@@ -104,12 +104,22 @@ class AddressController extends LoadingController {
 
     try {
       List<Address> result = await _addressRepository.getAll();
-      streamList.add(result);
+      streamList.add(getAddressFromUser(result));
     } catch(e) {
       streamList.addError(e);
     }
 
     return [];
+  }
+
+  List<Address> getAddressFromUser(List<Address> data) {
+    final result = data.where((value) => value.idPessoa == _loginController.person.id).toList();
+
+    if(result.isEmpty) {
+      throw Exception("Nao há endereco cadastrado para seu usuário!");
+    }
+
+    return result;
   }
 
   void setAddress(Address address) {

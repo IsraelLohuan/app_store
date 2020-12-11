@@ -5,6 +5,13 @@ import 'package:appstore/app/models/product.dart';
 import 'package:appstore/app/shared/others/constants.dart';
 import 'package:intl/intl.dart';
 
+String dateFormat(String value) {
+
+  DateTime data = DateTime.parse(value);
+
+  return DateFormat('dd/MM/yyyy').format(data);
+}
+
 String getEndpointApi(String endpoint) {
   return Constants.API_BASE_URL + endpoint;
 }

@@ -7,7 +7,7 @@ class HeaderImage extends StatelessWidget {
     return Stack(
       children: <Widget>[
         _image(context),
-        _contentImage()
+        _contentImage(context)
       ],
     );
   }
@@ -35,7 +35,7 @@ class HeaderImage extends StatelessWidget {
     );
   }
 
-  Widget _buttonMore() {
+  Widget _buttonMore(BuildContext context) {
     return Container(
       width: 150,
       child: RaisedButton(
@@ -50,12 +50,26 @@ class HeaderImage extends StatelessWidget {
           ),
         ),
         color: Constants.COLOR_SECONDARY,
-        onPressed: () => null,
+        onPressed: () => showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("MaxClock Relógios"),
+              content: Text("Nossos relógios possuem qualidade e valores acessíveis, entregamos na porta da sua casa para maior comodidade! Ficou interessado ? fique por dentro das novidades em nosso APP :)"),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("Ok, obrigado.", style: TextStyle(color: Constants.COLOR_PRIMARY),),
+                  onPressed: () => Navigator.of(context).pop(),
+                )
+              ],
+            );
+          }
+        ),
       ),
     );
   }
 
-  Widget _contentImage() {
+  Widget _contentImage(BuildContext context) {
     return Padding(
         padding: EdgeInsets.only(left: 16, top: 275),
         child: Column(
@@ -64,7 +78,7 @@ class HeaderImage extends StatelessWidget {
             _textImage("Relógios"),
             _textImage("de qualidade"),
             SizedBox(height: 5,),
-            _buttonMore()
+            _buttonMore(context)
           ],
         )
     );

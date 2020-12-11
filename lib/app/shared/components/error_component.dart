@@ -6,8 +6,10 @@ class ErrorComponent extends StatelessWidget {
   final String message;
   final Function onPressed;
   final bool visibleButton;
+  final Color colorButton;
+  final IconData icon;
 
-  ErrorComponent({this.message, this.onPressed, this.visibleButton = true});
+  ErrorComponent({this.message, this.colorButton = Colors.white, this.onPressed, this.visibleButton = true, this.icon = Icons.error});
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +20,15 @@ class ErrorComponent extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Icon(
-              Icons.error,
-              color: Colors.white,
+              icon,
+              color: colorButton,
               size: 80,
           ),
           SizedBox(height: 16,),
           Text(
             message,
             style: TextStyle(
-              color: Colors.white,
+              color: colorButton,
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),

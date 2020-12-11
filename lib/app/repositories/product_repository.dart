@@ -11,7 +11,6 @@ class ProductRepository {
         getEndpointApi("/products")
     );
 
-
     if(response.statusCode == 200) {
       final data = json.decode(response.body);
       return data.map<Product>((product) => Product.fromJson(product)).toList();

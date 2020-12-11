@@ -1,5 +1,5 @@
 import 'package:appstore/app/models/product.dart';
-import 'package:appstore/app/modules/cart/controller/cart_controller.dart';
+import 'package:appstore/app/shared/controllers/cart_controller.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 
