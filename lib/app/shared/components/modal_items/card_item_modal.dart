@@ -1,6 +1,6 @@
 import 'package:appstore/app/models/product.dart';
 import 'package:appstore/app/modules/details/components/cart_counter.dart';
-import 'package:appstore/app/shared/others/helper.dart';
+import 'package:appstore/app/shared/components/image_product.dart';
 import 'package:flutter/material.dart';
 
 class CardItemModel extends StatefulWidget {
@@ -51,7 +51,7 @@ class ImageCardItemModel extends StatelessWidget {
       color: Colors.grey[100],
       child: Padding(
         padding: EdgeInsets.all(8),
-        child: Image.memory(getBytesImage(product.base64)),
+        child: ImageProduct(product),
       )
     );
   }

@@ -4,9 +4,8 @@ class Product {
   double preco;
   double desconto;
   String descricao;
-  String filename;
+  String url;
   String titulo;
-  String base64;
   bool destaque;
   bool masculino;
 
@@ -16,9 +15,8 @@ class Product {
         this.descricao,
         this.desconto,
         this.masculino,
-        this.filename,
+        this.url,
         this.titulo,
-        this.base64,
         this.destaque});
 
   Product.fromJson(Map<String, dynamic> json) {
@@ -27,9 +25,8 @@ class Product {
     descricao = json['descricao'];
     desconto = double.parse(json['desconto']);
     masculino = json['masculino'] == "1";
-    filename = json['filename'];
+    url = json['url_image'];
     titulo = json['titulo'];
-    base64 = json['base_64'];
     destaque = json['destaque'] == "1";
   }
 
@@ -40,9 +37,8 @@ class Product {
     data['descricao'] = this.descricao;
     data['desconto'] = this.desconto;
     data['masculino'] = this.masculino;
-    data['filename'] = this.filename;
+    data['url_image'] = this.url;
     data['titulo'] = this.titulo;
-    data['base_64'] = this.base64;
     data['destaque'] = this.destaque;
     return data;
   }

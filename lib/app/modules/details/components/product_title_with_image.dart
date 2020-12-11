@@ -1,4 +1,5 @@
 import 'package:appstore/app/models/product.dart';
+import 'package:appstore/app/shared/components/image_product.dart';
 import 'package:appstore/app/shared/others/helper.dart';
 import 'package:flutter/material.dart';
 
@@ -36,11 +37,11 @@ class ProductTitleWithImage extends StatelessWidget {
                 ),
                 SizedBox(width: 16,),
                 Expanded(
-                  child: Image.memory(
-                    getBytesImage((product.base64)),
-                    height: 180,
+                  child: ImageProduct(
+                    product,
+                    heigth: 180,
                     width: 180,
-                  ),
+                  )
                 )
               ],
             )
