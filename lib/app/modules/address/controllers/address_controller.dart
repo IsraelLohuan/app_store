@@ -1,9 +1,10 @@
 import 'dart:async';
-
 import 'package:appstore/app/models/address.dart';
+import 'package:appstore/app/models/via_cep.dart';
 import 'package:appstore/app/modules/auth/controllers/login_controller.dart';
 import 'package:appstore/app/repositories/address_repository.dart';
 import 'package:appstore/app/shared/controllers/loading_controller.dart';
+import 'package:appstore/app/shared/others/helper.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -39,8 +40,12 @@ class AddressController extends LoadingController {
       controllersText[4].text = address.bairro;
       controllersText[5].text = address.cep;
       controllersText[6].text = address.numero;
-      ufSelected = address.uf;
+      setUf(address.uf);
     }
+  }
+
+  void setUf(String uf) {
+    ufSelected = uf;
   }
 
   Future<void> insert() async {
@@ -120,6 +125,26 @@ class AddressController extends LoadingController {
     }
 
     return result;
+  }
+
+  Future searchCEP(String value) async {
+    final cep = removeMask(value);
+
+    if(cep.length == 8) {
+
+      final infoCep = await _addressRepository.searchCep(cep);
+
+      if(infoCep != null) {
+        fillFields(infoCep);
+      }
+    }
+  }
+
+  void fillFields(ViaCep data) {
+    controllersText[2].text = data.logradouro;
+    controllersText[3].text = data.localidade;
+    controllersText[4].text = data.bairro;
+    setUf(data.uf);
   }
 
   void setAddress(Address address) {

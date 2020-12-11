@@ -32,13 +32,13 @@ Uint8List getBytesImage(String imageBase64) {
 
 String formatNumberInReal(double valor, {bool replace = false}) {
 
-  NumberFormat numberFormat = new NumberFormat("00.00", "pt_BR");
+  NumberFormat numberFormat = new NumberFormat.simpleCurrency(locale: "pt_BR");
 
   if(replace) {
     return numberFormat.format(valor).replaceAll("R\$", "");
   }
 
-  return "R\$ " + numberFormat.format(valor);
+  return numberFormat.format(valor);
 }
 
 String getPercentualValue(double valueTotal, double valueDiscount) {
@@ -55,4 +55,8 @@ int getTypeCard(Product product) {
     return Constants.TYPE_CARD_FEATURED;
 
   return Constants.TYPE_CARD_GENERAL;
+}
+
+String removeMask(String value) {
+  return value.replaceAll(new RegExp(r'[^\w\s]+'),'');
 }

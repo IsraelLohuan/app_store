@@ -1,9 +1,17 @@
 import 'dart:convert';
 import 'package:appstore/app/models/address.dart';
+import 'package:appstore/app/models/via_cep.dart';
 import 'package:appstore/app/shared/others/helper.dart';
 import 'package:http/http.dart' as http;
 
 class AddressRepository {
+
+  Future<ViaCep> searchCep(String cep) async {
+
+    final result = await http.get("http://viacep.com.br/ws/${cep}/json/");
+
+    return ViaCep.fromJson(json.decode(result.body));
+  }
 
   Future<void> insert(Address address) async {
 

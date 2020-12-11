@@ -9,8 +9,9 @@ class InputTextCostumer extends StatelessWidget {
   final List<TextInputFormatter> inputFormatter;
   final TextEditingController controller;
   final bool enabled;
+  final Function onChanged;
 
-  InputTextCostumer({this.label, this.icon, this.validator, this.inputFormatter, this.controller, this.enabled});
+  InputTextCostumer({this.label, this.icon, this.validator, this.inputFormatter, this.controller, this.enabled, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,7 @@ class InputTextCostumer extends StatelessWidget {
       ),
       controller: controller,
       enabled: enabled,
+      onChanged: onChanged,
     );
   }
 }

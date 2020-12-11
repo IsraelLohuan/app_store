@@ -62,6 +62,11 @@ class _UserPageState extends State<UserPage> {
                 validator: (String value) => _userController.validatorDocument(value),
                 controller: _userController.controllersText[1],
                 enabled: _userController.isEditing == false,
+                inputFormatter: [
+                  MaskTextInputFormatter(
+                      mask: "###.###.###-##"
+                  ),
+                ]
               ),
               SizedBox(height: 16,),
               InputTextCostumer(

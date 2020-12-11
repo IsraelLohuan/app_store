@@ -10,6 +10,7 @@ import 'package:appstore/app/shared/others/dialog.dart';
 import 'package:appstore/app/shared/others/helper.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class AddressPage extends StatefulWidget {
 
@@ -95,6 +96,12 @@ class _AddressAddState extends State<AddressPage> {
                       icon: Icons.location_on,
                       validator: (String value) => _addressController.validatorCEP(value),
                       controller: _addressController.controllersText[5],
+                      onChanged: (String value) => addressController.searchCEP(value),
+                      inputFormatter: [
+                        MaskTextInputFormatter(
+                          mask: "#####-###"
+                        ),
+                      ]
                     ),
                   ),
                   Padding(
