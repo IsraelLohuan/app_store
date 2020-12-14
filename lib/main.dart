@@ -5,6 +5,7 @@ import 'package:appstore/app/modules/auth/controllers/login_controller.dart';
 import 'package:appstore/app/modules/auth/view/login_page.dart';
 import 'package:appstore/app/modules/auth/view/user_page.dart';
 import 'package:appstore/app/modules/my_orders/view/my_orders_page.dart';
+import 'package:appstore/app/modules/splash/view/splash_page.dart';
 import 'package:appstore/app/shared/controllers/cart_controller.dart';
 import 'package:appstore/app/modules/details/view/details_page.dart';
 import 'package:appstore/app/modules/main/view/main_page.dart';
@@ -31,8 +32,9 @@ class MyApp extends StatelessWidget {
         title: 'MaxClock App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primaryColor: Constants.COLOR_PRIMARY),
-        initialRoute: LoginPage.router,
+        initialRoute: SplashPage.router,
         routes: {
+          SplashPage.router: (_) => SplashPage(),
           LoginPage.router: (_) => LoginPage(),
           UserPage.router: (context) => UserPage(person: ModalRoute.of(context).settings.arguments,),
           MainPage.router: (_) => MainPage(),
